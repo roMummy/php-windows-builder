@@ -86,11 +86,13 @@ jobs:
       - name: Build GMSSL
         working-directory: ${{ github.workspace }}\build
         run: nmake 
+        
       - name: ls
         run: ls ${{ github.workspace }}\build
+        
       - name: Add GMSSL to PATH
         run: |
-          echo "##vso[task.setvariable variable=PATH]${{ github.workspace }}\gmssl\GmSSL-3.1.1\build\bin\Release;$env:PATH"
+          echo "##vso[task.setvariable variable=PATH]${{ github.workspace }}\build\bin\Release;$env:PATH"
 
       - name: Log GMSSL
         working-directory: ${{ github.workspace }}\build
