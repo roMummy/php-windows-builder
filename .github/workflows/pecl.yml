@@ -67,22 +67,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build the extension
-        uses: ./extension
-        with:
-          extension-url: ${{ inputs.extension-url }}
-          extension-ref: ${{ inputs.extension-ref }}
-          php-version: ${{ matrix.php-version }}
-          arch: ${{ matrix.arch }}
-          ts: ${{ matrix.ts }}
-          args: ${{ inputs.args }}
-          libs: ${{ inputs.libs }}
-          run-tests: ${{ inputs.run-tests }}
-          test-runner: ${{ inputs.test-runner }}
-          build-directory: C:\build
-        env:
-          artifact-naming-scheme: pecl
-      # 安装 Chocolatey
+         # 安装 Chocolatey
       - name: Install Chocolatey
         run: |
           Set-ExecutionPolicy Bypass -Scope Process -Force; 
@@ -99,6 +84,21 @@ jobs:
         run: |
           $env:OPENSSL_DIR = "C:\Program Files\OpenSSL\"
           $env:GMSSL_DIR = "C:\Program Files\GMSSL\"
+      - name: Build the extension
+        uses: ./extension
+        with:
+          extension-url: ${{ inputs.extension-url }}
+          extension-ref: ${{ inputs.extension-ref }}
+          php-version: ${{ matrix.php-version }}
+          arch: ${{ matrix.arch }}
+          ts: ${{ matrix.ts }}
+          args: ${{ inputs.args }}
+          libs: ${{ inputs.libs }}
+          run-tests: ${{ inputs.run-tests }}
+          test-runner: ${{ inputs.test-runner }}
+          build-directory: C:\build
+        env:
+          artifact-naming-scheme: pecl
 
   artifacts:
     runs-on: ubuntu-latest
