@@ -87,6 +87,10 @@ jobs:
         working-directory: ${{ github.workspace }}\build
         run: nmake 
 
+      - name: Log GMSSL
+        working-directory: ${{ github.workspace }}\build
+        run: gmssl 
+
       - name: Build the extension
         uses: ./extension
         with:
