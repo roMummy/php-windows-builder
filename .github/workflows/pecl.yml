@@ -80,7 +80,7 @@ jobs:
       - name: Configure CMake
         run: |
           # Make sure you point to the correct source directory where CMakeLists.txt is located
-          cmake -B ${{ github.workspace }}\build -S ${{ github.workspace }}\gmssl\GmSSL-${{ env.GMSSL_VERSION }} -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DWIN32=ON -DOPENSSL_ROOT_DIR="C:/Program Files/OpenSSL"
+          cmake -B ${{ github.workspace }}\build -S ${{ github.workspace }}\gmssl\GmSSL-3.1.1 -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DWIN32=ON -DOPENSSL_ROOT_DIR="C:/Program Files/OpenSSL"
     
         # Build GMSSL
       - name: Build GMSSL
