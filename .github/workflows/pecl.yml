@@ -88,7 +88,8 @@ jobs:
         run: nmake 
         
       - name: ls
-        run:  for /r ${{ github.workspace }} %f in (*gmssl.exe*) do echo %f
+        run:  Get-ChildItem -Path ${{ github.workspace }} -Recurse -Filter "*gmssl.exe*"
+
           
         
       - name: Add GMSSL to PATH
