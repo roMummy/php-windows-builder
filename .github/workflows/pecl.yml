@@ -76,8 +76,8 @@ jobs:
       # 安装 OpenSSL 和 GMSSL
       - name: Install GMSSL and OpenSSL
         run: |
-          choco install openssl --version=1.1.1n
-          choco install gmssl --version=1.0.2g
+          choco install openssl 
+          choco install gmssl --version=3.1.0n
 
       # 配置 OpenSSL 和 GMSSL 环境变量
       - name: Set environment variables for OpenSSL and GMSSL
