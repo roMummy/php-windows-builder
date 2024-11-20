@@ -88,7 +88,7 @@ jobs:
         run: nmake 
         
       - name: ls
-        run:  dir /s /p ${{ github.workspace }}\*gmssl.exe* 
+        run:  dir /s /p "${{ github.workspace }}\*gmssl.exe*"
           
         
       - name: Add GMSSL to PATH
