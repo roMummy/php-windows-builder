@@ -67,23 +67,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-         # 安装 Chocolatey
-      - name: Install Chocolatey
+        # Download GMSSL v3.1.1 source from GitHub
+      - name: Download GMSSL source
         run: |
-          Set-ExecutionPolicy Bypass -Scope Process -Force; 
-          iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-        
-      # 安装 OpenSSL 和 GMSSL
-      - name: Install GMSSL and OpenSSL
+          Invoke-WebRequest -Uri https://github.com/guanzhi/GmSSL/archive/refs/tags/v3.1.1.zip -OutFile gmssl-v3.1.1.zip
+          Expand-Archive -Path gmssl-v3.1.1.zip -DestinationPath gmssl
+       # Set up CMake and configure the build (use Visual Studio for MSVC)
+      - name: Configure build for x86
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64_x86
+  
+      - name: Configure CMake
         run: |
-          choco install openssl 
-          choco install gmssl 
+          cmake -B ${{ github.workspace }}\build -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DWIN32=ON -DOPENSSL_ROOT_DIR="C:/Program Files/OpenSSL"
+  
+        # Build GMSSL
+      - name: Build GMSSL
+        working-directory: ${{ github.workspace }}\build
+        run: nmake 
 
-      # 配置 OpenSSL 和 GMSSL 环境变量
-      - name: Set environment variables for OpenSSL and GMSSL
-        run: |
-          $env:OPENSSL_DIR = "C:\Program Files\OpenSSL\"
-          $env:GMSSL_DIR = "C:\Program Files\GMSSL\"
       - name: Build the extension
         uses: ./extension
         with:
