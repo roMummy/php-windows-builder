@@ -77,11 +77,11 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: amd64_x86
-  
       - name: Configure CMake
         run: |
-          cmake -B ${{ github.workspace }}\build -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DWIN32=ON -DOPENSSL_ROOT_DIR="C:/Program Files/OpenSSL"
-  
+          # Make sure you point to the correct source directory where CMakeLists.txt is located
+          cmake -B ${{ github.workspace }}\build -S ${{ github.workspace }}\gmssl\GmSSL-${{ env.GMSSL_VERSION }} -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DWIN32=ON -DOPENSSL_ROOT_DIR="C:/Program Files/OpenSSL"
+    
         # Build GMSSL
       - name: Build GMSSL
         working-directory: ${{ github.workspace }}\build
