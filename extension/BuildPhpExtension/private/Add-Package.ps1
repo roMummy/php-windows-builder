@@ -80,7 +80,7 @@ function Add-Package {
             $arch = $Config.arch
             
             Write-Host "Checking for generated DLLs in the build directory..."
-            Get-ChildItem -Path $Config.build_directory -Recurse -Filter "*.dll" | ForEach-Object {
+            Get-ChildItem -Path ./ -Recurse -Filter "*.dll" | ForEach-Object {
                 Write-Host "Found DLL: $($_.FullName)"
             }
             
