@@ -94,7 +94,8 @@ jobs:
         
       - name: Add GMSSL to PATH
         run: |
-          echo "##vso[task.setvariable variable=PATH]${{ github.workspace }}\build\bin;$env:PATH"
+          echo "##vso[task.setvariable variable=PATH]D:${{ github.workspace }}\build\bin;$env:PATH"
+
 
       - name: Log GMSSL
         working-directory: ${{ github.workspace }}\build
