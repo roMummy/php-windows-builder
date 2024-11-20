@@ -26,4 +26,4 @@ jobs:
         uses: php/php-windows-builder/release@v1
         with:
           release: 8.1.28
-          token: ${{ secrets.PHP_TOKEN }}
+          token: ${{ github.token }}
