@@ -82,6 +82,23 @@ jobs:
           build-directory: C:\build
         env:
           artifact-naming-scheme: pecl
+      # 安装 Chocolatey
+      - name: Install Chocolatey
+        run: |
+          Set-ExecutionPolicy Bypass -Scope Process -Force; 
+          iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+        
+      # 安装 OpenSSL 和 GMSSL
+      - name: Install GMSSL and OpenSSL
+        run: |
+          choco install openssl --version=1.1.1n
+          choco install gmssl --version=1.0.2g
+
+      # 配置 OpenSSL 和 GMSSL 环境变量
+      - name: Set environment variables for OpenSSL and GMSSL
+        run: |
+          $env:OPENSSL_DIR = "C:\Program Files\OpenSSL\"
+          $env:GMSSL_DIR = "C:\Program Files\GMSSL\"
 
   artifacts:
     runs-on: ubuntu-latest
