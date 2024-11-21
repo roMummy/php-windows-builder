@@ -107,7 +107,9 @@ jobs:
 
       - name: Log GMSSL
         working-directory: ${{ github.workspace }}\build
-        run: gmssl version
+        run: |
+          gmssl version
+          phpize
 
       - name: Build the extension
         uses: ./extension
